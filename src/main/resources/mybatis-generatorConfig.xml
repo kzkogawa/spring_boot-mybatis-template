@@ -3,13 +3,13 @@
 <generatorConfiguration>
 	<context id="context1" targetRuntime="MyBatis3Simple">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/test" userId="root" password="admin" />
-		<javaModelGenerator targetPackage="demo.model" targetProject="template">
+		<javaModelGenerator targetPackage="demo.model" targetProject="spring-template">
 			<property name="rootClass" value="RootModel"/>
 		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="sqlmap" targetProject="template/src/main/resources">
+		<sqlMapGenerator targetPackage="sqlmap" targetProject="spring-template/src/main/resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
-		<javaClientGenerator targetPackage="demo.mapper" targetProject="template" type="XMLMAPPER" />
-		<table tableName="user" />
+		<javaClientGenerator targetPackage="demo.mapper" targetProject="spring-template" type="XMLMAPPER" />
+		<table tableName="account" />
 	</context>
 </generatorConfiguration>
