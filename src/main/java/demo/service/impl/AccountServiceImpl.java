@@ -11,7 +11,7 @@ import demo.mapper.AccountMapper;
 import demo.mapper.AccountRoleMapper;
 import demo.model.Account;
 import demo.model.AccountRole;
-import demo.model.RootSearchModel;
+import demo.model.SearchModel;
 import demo.service.IAccountService;
 
 @Service
@@ -30,8 +30,8 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public Account[] findAccount(Account account) {
-		return accountMapper.selectList(account, new RootSearchModel().getRowBounds());
+	public Account[] findAccount(SearchModel searchModel) {
+		return accountMapper.selectList(searchModel.getQuery(), searchModel.getRowBounds());
 	}
 
 	@Transactional
@@ -40,10 +40,11 @@ public class AccountServiceImpl implements IAccountService {
 		int insertCount = accountMapper.insert(account);
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		accountMapper.updateByPrimaryKey(account);
-		for (AccountRole accountRole : account.getAccountRoles()) {
-			accountRole.setUserName(account.getUserName());
-			accountRoleMapper.insert(accountRole);
-		}
+		if (account.getAccountRoles() != null)
+			for (AccountRole accountRole : account.getAccountRoles()) {
+				accountRole.setUserName(account.getUserName());
+				accountRoleMapper.insert(accountRole);
+			}
 		return insertCount;
 	}
 }
