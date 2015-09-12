@@ -20,7 +20,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 @EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private String usersByUsernameQuery = "SELECT user_name as username, password, true as enabled FROM account WHERE user_name = ?";
-	private String authoritiesByUsernameQuery = "SELECT user_name as username, 'user' as authority FROM account WHERE user_name = ?";
+	private String authoritiesByUsernameQuery = "SELECT user_name as username, role as authority FROM account_role WHERE user_name = ?";
 	@Autowired
 	private DataSource dataSource;
 	@Autowired
@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder()).usersByUsernameQuery(usersByUsernameQuery).authoritiesByUsernameQuery(authoritiesByUsernameQuery);
 	}
 
@@ -54,4 +55,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(FilterFactory.createBeforCsrfFilter(), CsrfFilter.class);
 		http.addFilterAfter(FilterFactory.createAfterCsrfFilter(), CsrfFilter.class);
 	}
+	
 }

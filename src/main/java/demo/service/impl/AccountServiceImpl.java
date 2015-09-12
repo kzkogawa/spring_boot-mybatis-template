@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import demo.mapper.AccountMapper;
+import demo.mapper.AccountRoleMapper;
 import demo.model.Account;
+import demo.model.AccountRole;
 import demo.model.RootSearchModel;
 import demo.service.IAccountService;
 
@@ -17,6 +19,8 @@ public class AccountServiceImpl implements IAccountService {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	AccountMapper accountMapper;
+	@Autowired
+	AccountRoleMapper accountRoleMapper;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -36,6 +40,10 @@ public class AccountServiceImpl implements IAccountService {
 		int insertCount = accountMapper.insert(account);
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		accountMapper.updateByPrimaryKey(account);
+		for (AccountRole accountRole : account.getAccountRoles()) {
+			accountRole.setUserName(account.getUserName());
+			accountRoleMapper.insert(accountRole);
+		}
 		return insertCount;
 	}
 }
