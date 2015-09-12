@@ -1,11 +1,13 @@
-package demo;
+package demo.config.data;
 
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -13,12 +15,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 @MapperScan("demo.mapper")
 public class DataConfig {
+	@Autowired
+	private Environment env;
 	private DataSource dataSource;
 
 	@Bean
 	public DataSource dataSource() {
 		if (this.dataSource == null) {
-			this.dataSource = new DriverManagerDataSource("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8", "root", "admin");
+			this.dataSource = new DriverManagerDataSource(env.getProperty("database.url"), env.getProperty("database.username"), env.getProperty("database.password"));
 		}
 		return this.dataSource;
 	}
