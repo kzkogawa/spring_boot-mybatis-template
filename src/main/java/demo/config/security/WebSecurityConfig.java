@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 
@@ -30,6 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private AccessDeniedHandler accessDeniedHandler;
 	@Autowired
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	@Autowired
+	private AuthenticationFailureHandler authenticationFailureHandler;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -51,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO uncomment
 		// http.authorizeRequests().anyRequest().authenticated();
-		http.formLogin().successHandler(authenticationSuccessHandler);
+		http.formLogin().successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler);
 		http.logout();
 		http.httpBasic();
 		// TODO remove 'http.csrf().disable();'

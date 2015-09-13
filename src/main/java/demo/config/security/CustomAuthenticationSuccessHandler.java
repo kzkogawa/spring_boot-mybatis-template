@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -29,6 +31,7 @@ import demo.model.AccountRole;
 
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private RequestCache requestCache = new HttpSessionRequestCache();
 	@Autowired
 	AccountMapper accountMapper;
@@ -47,6 +50,14 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 			UserDetails userDetails = (UserDetails) principal;
 			Account account = accountMapper.selectByUserName(userDetails.getUsername());
 			if (account == null) {
+				log.warn("no account data in db {}", userDetails);
+				/*
+				 * if there is no account in db, the user may be super user like
+				 * a 'admin'
+				 * 
+				 * @see
+				 * WebSecurityConfig.configure(AuthenticationManagerBuilder)
+				 */
 				account = new Account();
 				account.setUserName(userDetails.getUsername());
 				List<AccountRole> accountRoles = new ArrayList<AccountRole>();
