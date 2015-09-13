@@ -1,12 +1,12 @@
 package demo.service;
 
 import demo.model.Account;
-import demo.model.SearchModel;
+import demo.model.AccountSearch;
 
 public interface IAccountService {
 	Account findAccount(Integer id);
 
-	Account[] findAccount(SearchModel searchModel);
+	Account[] findAccount(AccountSearch searchModel);
 
 	int createAccount(Account account);
 }

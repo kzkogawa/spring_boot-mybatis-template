@@ -11,7 +11,7 @@ import demo.mapper.AccountMapper;
 import demo.mapper.AccountRoleMapper;
 import demo.model.Account;
 import demo.model.AccountRole;
-import demo.model.SearchModel;
+import demo.model.AccountSearch;
 import demo.service.IAccountService;
 
 @Service
@@ -30,8 +30,8 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public Account[] findAccount(SearchModel searchModel) {
-		return accountMapper.selectList(searchModel.getQuery(), searchModel.getRowBounds());
+	public Account[] findAccount(AccountSearch searchModel) {
+		return accountMapper.selectList(searchModel, searchModel.getRowBounds());
 	}
 
 	@Transactional

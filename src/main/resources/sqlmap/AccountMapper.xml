@@ -69,8 +69,16 @@
 		select id, user_name, password
 		from account
 		<where>
-			<if test="id != null">id = #{id,jdbcType=INTEGER}</if>
-			<if test="userName != null and userName.length() != 0">and user_name = #{userName,jdbcType=VARCHAR}</if>
+			<if test="account != null">
+				<if test="account.id != null">id = #{account.id,jdbcType=INTEGER}</if>
+				<if test="account.userName != null and account.userName.length() != 0">and user_name = #{account.userName,jdbcType=VARCHAR}</if>
+			</if>
 		</where>
+		<if test="orderBy != null">${orderBy}</if>
+	</select>
+	<select id="selectByUserName" resultMap="WithRoleResultMap">
+		select id, user_name
+		from account
+		where user_name = #{account.userName,jdbcType=VARCHAR}
 	</select>
 </mapper>

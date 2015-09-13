@@ -1,11 +1,11 @@
 package demo.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 
 import demo.model.Account;
+import demo.model.AccountSearch;
 
 public interface AccountMapper {
 
@@ -39,6 +39,8 @@ public interface AccountMapper {
 	 */
 	int updateByPrimaryKey(Account record);
 
-	Account[] selectList(Map<String, Object> map, RowBounds rowBounds);
+	Account[] selectList(AccountSearch searchModel, RowBounds rowBounds);
+
+	Account selectByUserName(String username);
 
 }

@@ -65,8 +65,10 @@ public class FilterFactory {
 	public static void saveCsrfTokenCookie(HttpServletRequest request, HttpServletResponse response) {
 		CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
 		log.debug("{}", csrfToken);
-		CookieGenerator cookieGenerator = new CookieGenerator();
-		cookieGenerator.setCookieName(DEFAULT_CSRF_HEADER_NAME);
-		cookieGenerator.addCookie(response, csrfToken.getToken());
+		if (csrfToken != null) {
+			CookieGenerator cookieGenerator = new CookieGenerator();
+			cookieGenerator.setCookieName(DEFAULT_CSRF_HEADER_NAME);
+			cookieGenerator.addCookie(response, csrfToken.getToken());
+		}
 	}
 }
