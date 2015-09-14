@@ -21,17 +21,17 @@ public class AccountController {
 	@Autowired
 	IAccountService service;
 
-	@RequestMapping(value = { "/account/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/api/v1/account/{id}" }, method = RequestMethod.GET)
 	public Account get(@PathVariable Integer id) {
 		return service.findAccount(id);
 	}
 
-	@RequestMapping(value = { "/account" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/api/v1/account" }, method = RequestMethod.GET)
 	public Account[] get(AccountSearch accountSearch) {
 		return service.findAccount(accountSearch);
 	}
 
-	@RequestMapping(value = { "/account" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/api/v1/account" }, method = RequestMethod.POST)
 	public Account post(@Validated(InsertValidationGroup.class) @RequestBody Account account) {
 		log.debug("created account {}", service.createAccount(account));
 		return account;

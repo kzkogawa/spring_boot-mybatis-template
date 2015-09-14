@@ -2,12 +2,12 @@
  * 
  */
 function loginController($scope, $http) {
-	$scope.data = {};
+	$scope.formData = {};
 	$scope.login = function() {
 		$scope.response = {};
 		$http.post(
 				'/login',
-				$scope.data,
+				$scope.formData,
 				{
 					headers : {
 						'Content-Type' : 'application/x-www-form-urlencoded'
@@ -20,8 +20,29 @@ function loginController($scope, $http) {
 						}, str);
 						return str.join('&');
 					}
-				}).success(function(response) {
+				}).then(function(response) {
 			$scope.response.data = response;
 		});
+	};
+}
+function AccountController1($scope, $http) {
+	$scope.formData = {};
+	$scope.create = function() {
+		$http.post('/api/v1/account', $scope.formData, {}).then(
+				function(response) {
+					$scope.response.data = response;
+				});
+	};
+}
+function AccountController2($scope, $http) {
+	$scope.formData = {
+		account : {},
+		page : 1
+	};
+	$scope.search = function() {
+		$http.get('/api/v1/account', $scope.formData, {}).then(
+				function(response) {
+					$scope.items = response.data;
+				});
 	};
 }
