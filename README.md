@@ -1,19 +1,13 @@
 # Template project using Spring boot & mybatis
 
 ## Some portions implemented in this project are in below.
-#### view
-* thymeleaf
-#### controller
-* mvc
-* api
-#### database
+* thymeleaf view template
+* mvc controller
+* api controller
 * mysql
-#### orm
 * mybatis
-#### security
 * authentication
 * csrf
-#### log
 * logback
 
 ## There are some hard coding stuff. 
