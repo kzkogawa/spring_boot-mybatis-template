@@ -13,4 +13,4 @@
 * service unit test
 
 ## All you have to do with this is check out wiki.
-https://github.com/kzkogawa/spring_boot-mybatis-template/wiki
+https://github.com/kzkogawa/spring_boot-mybatis-template/wiki/All-you-have-to-do-...
