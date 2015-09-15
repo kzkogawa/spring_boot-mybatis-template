@@ -5,7 +5,7 @@
 	<context id="context1" targetRuntime="MyBatis3Simple">
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/demo" userId="root" password="admin" />
 		<javaModelGenerator targetPackage="demo.model" targetProject="spring-template">
-			<property name="rootClass" value="RootModel" />
+			<property name="rootClass" value="ModelBase" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<sqlMapGenerator targetPackage="sqlmap" targetProject="spring-template/src/main/resources">

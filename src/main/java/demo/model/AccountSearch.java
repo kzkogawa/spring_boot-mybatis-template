@@ -1,6 +1,6 @@
 package demo.model;
 
-public class AccountSearch extends RootSearchModel {
+public class AccountSearch extends SearchModelBase {
 	private String[] orderByColm = { "id", "user_name" };
 	private Account account;
 

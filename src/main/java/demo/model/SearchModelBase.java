@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.util.StringUtils;
 
-public abstract class RootSearchModel {
+public abstract class SearchModelBase {
 
 	/**
 	 * limit

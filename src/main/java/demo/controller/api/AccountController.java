@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.model.Account;
 import demo.model.AccountSearch;
-import demo.model.RootModel.InsertValidationGroup;
+import demo.model.ModelBase.InsertValidationGroup;
 import demo.service.IAccountService;
 
 @RestController

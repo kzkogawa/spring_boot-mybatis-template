@@ -1,6 +1,6 @@
 package demo.model;
 
-public class RootModel {
+public class ModelBase {
 	public static interface InsertValidationGroup {
 	};
 
