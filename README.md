@@ -10,6 +10,5 @@
 * csrf
 * logback
 
-## There are some hard coding stuff. 
-All you have to do with this is check out wiki.
+## All you have to do with this is check out wiki.
 https://github.com/kzkogawa/spring_boot-mybatis-template/wiki
