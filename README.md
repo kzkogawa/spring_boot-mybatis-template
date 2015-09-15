@@ -11,7 +11,5 @@
 * logback
 
 ## There are some hard coding stuff. 
-#### if you change 'demo.mapper', 'demo.model' package, you should modify
-* mybatis-generatorConfig.xml 
-* src/main/java/demo/config/data/DataConfig.java 
-And re-run mybatis generator!
+All you have to do with this is check out wiki.
+https://github.com/kzkogawa/spring_boot-mybatis-template/wiki
