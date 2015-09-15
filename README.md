@@ -6,7 +6,7 @@
 * api controller
 * mysql
 * mybatis
-* authentication
+* authentication by api
 * csrf
 * logback
 * controller unit test
